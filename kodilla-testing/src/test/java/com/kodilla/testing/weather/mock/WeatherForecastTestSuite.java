@@ -54,15 +54,12 @@ class WeatherForecastTestSuite {
     void testCalculateAverageTemperature(){
         //Given
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
-        double expected = (25.5+26.2+24.8+25.2+26.1)/5;
-        expected*=100;
-        expected = Math.round(expected);
-        expected/=100;
+        double expected = 25.56;
         //When
         double result = weatherForecast.averageTemperature();
 
         //Then
-        Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(expected, result, 0.01);
     }
 
     @Test
