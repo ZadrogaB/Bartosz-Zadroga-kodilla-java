@@ -172,25 +172,5 @@ class BoardTestSuite {
 
     }
 
-    /*@Test
-    void testAddTaskListAverageWorkingOnTaskWithAverageIntStream(){
-        //Given
-        Board project = prepareTestData();
-
-        //When
-        List<TaskList> inProgressTasks = new ArrayList<>();
-        inProgressTasks.add(new TaskList("In progress"));
-
-        double averageExpected = IntStream.range(0,project.getTaskLists().size())
-                .filter(n -> project.getTaskLists().get(n).getName().equals("In progress"))
-                .map(k->project.getTaskLists().get(k).getTasks().stream())
-
-
-        System.out.println("Test: "+averageExpected);
-
-        //Then
-        //assertEquals(10.0, );
-
-    }*/
 
 }
