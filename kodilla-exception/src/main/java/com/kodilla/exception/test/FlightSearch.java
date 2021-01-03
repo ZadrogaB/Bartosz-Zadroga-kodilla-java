@@ -30,17 +30,17 @@ public class FlightSearch {
 
                 System.out.println("Lot znaleziono!!!");
 
-                if (availableAirports.get(flight.getDepartureAirport()).booleanValue() == true
-                        && availableAirports.get(flight.getArrivalAirport()).booleanValue() == true) {
+                if (availableAirports.get(flight.getDepartureAirport())
+                        && availableAirports.get(flight.getArrivalAirport())) {
 
                     System.out.println("Lotnisko startu i docelowe otwarte. Lot jest możliwy.");
 
-                } else if (availableAirports.get(flight.getDepartureAirport()).booleanValue() == false
-                        && availableAirports.get(flight.getArrivalAirport()).booleanValue() == true) {
+                } else if (!availableAirports.get(flight.getDepartureAirport())
+                        && availableAirports.get(flight.getArrivalAirport())) {
                     System.out.println("Lotnisko startu zamknięte. Lot nie jest możliwy.");
 
-                } else if (availableAirports.get(flight.getDepartureAirport()).booleanValue() == true
-                        && availableAirports.get(flight.getArrivalAirport()).booleanValue() == false) {
+                } else if (availableAirports.get(flight.getDepartureAirport())
+                        && !availableAirports.get(flight.getArrivalAirport())) {
                     System.out.println("Lotnisko docelowe zamknięte. Lot nie jest możliwy.");
                 } else {
                     System.out.println("Lotnisko startu i docelowe zamknięte. Lot nie jest możliwy.");
