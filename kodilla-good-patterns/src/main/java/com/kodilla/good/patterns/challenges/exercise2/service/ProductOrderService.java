@@ -1,7 +1,9 @@
-package com.kodilla.good.patterns.challenges.exercise2.orders;
+package com.kodilla.good.patterns.challenges.exercise2.service;
 
-import com.kodilla.good.patterns.challenges.exercise2.interfaces_and_implementing_Classes.InformationService;
-import com.kodilla.good.patterns.challenges.exercise2.interfaces_and_implementing_Classes.OrderService;
+import com.kodilla.good.patterns.challenges.exercise2.dto.OrderDto;
+import com.kodilla.good.patterns.challenges.exercise2.service.InformationService;
+import com.kodilla.good.patterns.challenges.exercise2.service.OrderRequest;
+import com.kodilla.good.patterns.challenges.exercise2.service.OrderService;
 
 public class ProductOrderService {
     private InformationService informationService;

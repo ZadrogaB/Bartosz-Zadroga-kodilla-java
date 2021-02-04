@@ -1,7 +1,7 @@
-package com.kodilla.good.patterns.challenges.exercise2.orders;
+package com.kodilla.good.patterns.challenges.exercise2.dto;
 
 
-import com.kodilla.good.patterns.challenges.exercise2.objects.User;
+import com.kodilla.good.patterns.challenges.exercise2.model.User;
 
 public class OrderDto {
     public User user;

@@ -1,4 +1,4 @@
-package com.kodilla.good.patterns.challenges.exercise2.objects;
+package com.kodilla.good.patterns.challenges.exercise2.model;
 
 
 public class User {
