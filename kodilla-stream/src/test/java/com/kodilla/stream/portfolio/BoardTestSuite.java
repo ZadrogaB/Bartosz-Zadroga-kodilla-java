@@ -167,6 +167,8 @@ class BoardTestSuite {
 
         double averageResult = daysOnTasks/numberOfTasks;
 
+        System.out.println(numberOfTasks + ", " + daysOnTasks);
+
         //Then
         assertEquals(10.0, averageResult);
 
