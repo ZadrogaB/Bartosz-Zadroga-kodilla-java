@@ -16,5 +16,4 @@ public class Main {
 
         extraFoodShop.process(orderRequest, informationMail, productOrderService);
     }
-
 }
