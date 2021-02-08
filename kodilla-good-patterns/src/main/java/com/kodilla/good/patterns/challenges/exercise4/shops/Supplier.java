@@ -1,11 +1,6 @@
 package com.kodilla.good.patterns.challenges.exercise4.shops;
 
-import com.kodilla.good.patterns.challenges.exercise4.OrderProcessor;
 import com.kodilla.good.patterns.challenges.exercise4.objects.Product;
-import com.kodilla.good.patterns.challenges.exercise4.orders.InformationService;
-import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
-import com.kodilla.good.patterns.challenges.exercise4.orders.OrderService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
