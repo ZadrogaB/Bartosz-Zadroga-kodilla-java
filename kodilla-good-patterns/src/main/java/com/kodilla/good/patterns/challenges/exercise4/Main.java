@@ -14,6 +14,6 @@ public class Main {
         InformationMail informationMail = new InformationMail();
         ProductOrderService productOrderService = new ProductOrderService();
 
-        extraFoodShop.process(orderRequest, informationMail, productOrderService);
+        OrderProcessor.process(orderRequest, informationMail, productOrderService);
     }
 }
