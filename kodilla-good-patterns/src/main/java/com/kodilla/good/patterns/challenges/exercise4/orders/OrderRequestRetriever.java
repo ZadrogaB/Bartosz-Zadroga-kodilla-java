@@ -9,7 +9,7 @@ import com.kodilla.good.patterns.challenges.exercise4.objects.Supplier;
 
 public class OrderRequestRetriever {
     public OrderRequest retrieve() {
-        Product product = new Product("Marchew Bio", 7, 5);
+        Product product = new Product("Marchew Bio", 10, 5);
         Supplier extraFoodShop = new Supplier("ExtraFoodShop");
         Product supplierProduct = new Product("Marchew Bio", 50, 5);
         extraFoodShop.addProductToList(supplierProduct);

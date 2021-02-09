@@ -10,7 +10,9 @@ public class OrderInformation {
                     + " x " + orderRequestDto.getOrderRequest().getProduct().getNumberOfProducts() + ". Cena: " + orderRequestDto.getOrderRequest().getProduct().getNumberOfProducts()
                     * orderRequestDto.getOrderRequest().getProduct().getPrice());
         } else {
-            System.out.println("Nie udało się zrealizować zamówienia");
+            System.out.println("Nie udało się zrealizować zamówienia. " + orderRequestDto.getSupplier().getCompanyName() + " ma tylko "
+                    + orderRequestDto.getSupplier().getNumberOfProduct(orderRequestDto.getOrderRequest().getProduct())
+                    + " " + orderRequestDto.getOrderRequest().getProduct().getProductName());
         }
     }
 }
