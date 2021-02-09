@@ -1,8 +1,8 @@
-package kodilla.good.patterns.challenges.exercise4.orders;
+package com.kodilla.good.patterns.challenges.exercise4.orders;
 
-import kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
-import kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
-import kodilla.good.patterns.challenges.exercise4.objects.Supplier;
+import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
+import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
+import com.kodilla.good.patterns.challenges.exercise4.objects.Supplier;
 
 public class OrderProcessor {
 

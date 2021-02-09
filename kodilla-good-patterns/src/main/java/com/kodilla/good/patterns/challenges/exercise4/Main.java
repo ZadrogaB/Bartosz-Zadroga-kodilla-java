@@ -1,19 +1,19 @@
 package com.kodilla.good.patterns.challenges.exercise4;
 
+import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
 import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
-import com.kodilla.good.patterns.challenges.exercise4.orders.InformationMail;
-import com.kodilla.good.patterns.challenges.exercise4.orders.OrderRequestRetriever;
-import com.kodilla.good.patterns.challenges.exercise4.orders.ProductOrderService;
-import com.kodilla.good.patterns.challenges.exercise4.shops.ExtraFoodShop;
+import com.kodilla.good.patterns.challenges.exercise4.objects.Supplier;
+import com.kodilla.good.patterns.challenges.exercise4.orders.*;
 
 public class Main {
     public static void main(String[] args) {
-        ExtraFoodShop extraFoodShop = new ExtraFoodShop();
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
-        OrderRequest orderRequest = orderRequestRetriever.retrieve(extraFoodShop);
-        InformationMail informationMail = new InformationMail();
-        ProductOrderService productOrderService = new ProductOrderService();
+        OrderRequest orderRequest = orderRequestRetriever.retrieve();
+        OrderProcessor orderProcessor = new OrderProcessor();
+        Supplier supplier = orderRequest.getSupplierList().getSupplierFromList("ExtraFoodShop");
 
-        OrderProcessor.process(orderRequest, informationMail, productOrderService);
+        OrderRequestDto orderRequestDto = orderProcessor.process(supplier, orderRequest);
+        OrderInformation orderInformation = new OrderInformation();
+        orderInformation.information(orderRequestDto);
     }
 }

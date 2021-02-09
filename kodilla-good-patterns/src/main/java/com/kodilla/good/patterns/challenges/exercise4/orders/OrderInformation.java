@@ -1,6 +1,6 @@
-package kodilla.good.patterns.challenges.exercise4.orders;
+package com.kodilla.good.patterns.challenges.exercise4.orders;
 
-import kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
+import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
 
 public class OrderInformation {
     public void information(OrderRequestDto orderRequestDto){

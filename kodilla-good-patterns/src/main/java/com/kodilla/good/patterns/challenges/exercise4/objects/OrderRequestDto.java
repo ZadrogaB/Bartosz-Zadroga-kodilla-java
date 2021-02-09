@@ -1,4 +1,4 @@
-package kodilla.good.patterns.challenges.exercise4.objects;
+package com.kodilla.good.patterns.challenges.exercise4.objects;
 
 public class OrderRequestDto {
     private OrderRequest orderRequest;

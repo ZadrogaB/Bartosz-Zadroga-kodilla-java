@@ -1,12 +1,10 @@
-package kodilla.good.patterns.challenges.exercise4.objects;
-
-import kodilla.good.patterns.challenges.exercise4.SupplierInterface;
+package com.kodilla.good.patterns.challenges.exercise4.objects;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Supplier implements SupplierInterface {
+public class Supplier {
     private String companyName;
     private List<Product> productList = new ArrayList<>();
 
@@ -32,7 +30,6 @@ public class Supplier implements SupplierInterface {
         return result.get(0);
     }
 
-    @Override
     public String getCompanyName() {
         return companyName;
     }
