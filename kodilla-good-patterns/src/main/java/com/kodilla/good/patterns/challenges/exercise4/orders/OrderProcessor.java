@@ -7,10 +7,10 @@ import com.kodilla.good.patterns.challenges.exercise4.shops.Supplier;
 
 public class OrderProcessor {
 
-    public void process(String companyName , OrderRequest orderRequest){
-        Supplier supplier = orderRequest.getSupplierList().getSupplierFromList(companyName);
+    public void process( OrderRequest orderRequest){
+        Supplier supplier = orderRequest.getSupplier();
         OrderRequestDto orderRequestDto = supplier.process(orderRequest);
         OrderInformation information = new OrderInformation();
-        information.inform(orderRequestDto, companyName);
+        information.inform(orderRequestDto);
     }
 }

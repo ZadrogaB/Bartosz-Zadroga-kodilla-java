@@ -5,14 +5,16 @@ import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
 import com.kodilla.good.patterns.challenges.exercise4.orders.*;
 import com.kodilla.good.patterns.challenges.exercise4.shops.Supplier;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
-        OrderRequest orderRequest = orderRequestRetriever.retrieve();
+        List<OrderRequest> orderRequests = orderRequestRetriever.retrieve();
         OrderProcessor orderProcessor = new OrderProcessor();
 
-        orderProcessor.process("ExtraFoodShop", orderRequest);
-        orderProcessor.process("GlutenFreeShop", orderRequest);
-        orderProcessor.process("HealthyShop", orderRequest);
+        for (OrderRequest orderRequest : orderRequests){
+            orderProcessor.process(orderRequest);
+        }
     }
 }
