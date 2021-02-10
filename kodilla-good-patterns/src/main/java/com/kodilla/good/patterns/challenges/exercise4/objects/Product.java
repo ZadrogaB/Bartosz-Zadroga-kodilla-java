@@ -9,14 +9,6 @@ public class Product {
         return productName;
     }
 
-    public int getNumberOfProducts() {
-        return numberOfProducts;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
     public Product(String productName, int numberOfProducts, double price) {
         this.productName = productName;
         this.numberOfProducts = numberOfProducts;

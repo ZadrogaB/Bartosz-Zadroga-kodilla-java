@@ -17,11 +17,6 @@ public class ExtraFoodShop implements Supplier {
         productList.add(new Product("Product9",5,5));
     }
 
-    @Override
-    public String getCompanyName() {
-        return companyName;
-    }
-
     public OrderRequestDto process(OrderRequest orderRequest){
         return new OrderRequestDto(orderRequest, true, "Produkt zostanie wysłany po zebraniu plonów.");    }
 }

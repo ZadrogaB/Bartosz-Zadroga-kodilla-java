@@ -17,11 +17,6 @@ public class HealthyShop implements Supplier {
         productList.add(new Product("Product6",5,5));
     }
 
-    @Override
-    public String getCompanyName() {
-        return companyName;
-    }
-
     public OrderRequestDto process(OrderRequest orderRequest){
         return new OrderRequestDto(orderRequest, false, "Z powodu problemów technicznych nie zrealizujemy zmaówienie. Przepraszamy.");
     }

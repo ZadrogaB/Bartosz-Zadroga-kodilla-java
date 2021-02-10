@@ -18,11 +18,6 @@ public class GlutenFreeShop implements Supplier {
         productList.add(new Product("Product3",5,5));
     }
 
-    @Override
-    public String getCompanyName() {
-        return companyName;
-    }
-
     public OrderRequestDto process(OrderRequest orderRequest){
         List<Product> resultList = productList.stream()
                 .filter(n->n.getProductName().equals(orderRequest.getProduct().getProductName()))

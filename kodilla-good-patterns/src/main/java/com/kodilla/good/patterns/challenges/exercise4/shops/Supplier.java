@@ -4,6 +4,5 @@ import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequest;
 import com.kodilla.good.patterns.challenges.exercise4.objects.OrderRequestDto;
 
 public interface Supplier {
-    String getCompanyName();
     OrderRequestDto process(OrderRequest orderRequest);
 }
