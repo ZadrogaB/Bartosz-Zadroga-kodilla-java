@@ -3,16 +3,12 @@ package com.kodilla.good.patterns.challenges.exercise4.objects;
 public class OrderRequestDto {
     private OrderRequest orderRequest;
     private boolean isOrderPossible;
-    private Supplier supplier;
+    private String text;
 
-    public OrderRequestDto(OrderRequest orderRequest, boolean isOrderPossible, Supplier supplier) {
+    public OrderRequestDto(OrderRequest orderRequest, boolean isOrderPossible, String text) {
         this.orderRequest = orderRequest;
         this.isOrderPossible = isOrderPossible;
-        this.supplier = supplier;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
+        this.text = text;
     }
 
     public OrderRequest getOrderRequest() {
@@ -21,5 +17,9 @@ public class OrderRequestDto {
 
     public boolean isOrderPossible() {
         return isOrderPossible;
+    }
+
+    public String getText() {
+        return text;
     }
 }

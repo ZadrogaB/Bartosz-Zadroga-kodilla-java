@@ -1,6 +1,7 @@
 package com.kodilla.good.patterns.challenges.exercise4.objects;
 
-import com.kodilla.good.patterns.challenges.exercise4.objects.Supplier;
+
+import com.kodilla.good.patterns.challenges.exercise4.shops.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
