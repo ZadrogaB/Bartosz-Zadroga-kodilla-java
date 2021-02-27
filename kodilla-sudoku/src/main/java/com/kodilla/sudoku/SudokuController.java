@@ -15,6 +15,7 @@ public class SudokuController {
         /*jeśli ta cyfra jest wpisana w innym polu, usuwamy ją z tablicy możliwych cyfr*/
         List<Integer> valuesInRow = new ArrayList<>();
         for (int row = 0; row < board.getListOfRows().size(); row++) {   //iterowanie po kolejnych rzędach
+            valuesInRow.clear();
             for (int column = 0; column < board.getListOfRows().get(row).getElementsInRow().size(); column++) {  //iterowanie po kolejnych kolumnach w rzędzie
                 SudokuElement sudokuElement = board.getListOfRows().get(row).getElementsInRow().get(column);
                 if(sudokuElement.getValue() != -1) {
@@ -57,14 +58,17 @@ public class SudokuController {
                     }
                 }
             }
+            allValuesInRow.clear();
         }
     }
+
 
     // OPERATIONS FOR COLUMNS
     public void removingValuesFromPossibleValuesColumns(SudokuBoard board) {
         /*jeśli ta cyfra jest wpisana w innym polu, usuwamy ją z tablicy możliwych cyfr*/
         List<Integer> valuesInColumn = new ArrayList<>();
         for (int column = 0; column < 9; column++) {
+            valuesInColumn.clear();
             for (int row = 0; row < 9; row++) {
                 SudokuElement sudokuElement = board.getListOfRows().get(row).getElementsInRow().get(column);
                 if(sudokuElement.getValue() != -1) {
@@ -121,6 +125,31 @@ public class SudokuController {
 
 
     // OPERATIONS FOR SECTIONS
+    public void removingValuesFromPossibleValuesSection(SudokuBoard board) {
+        /*jeśli ta cyfra jest wpisana w innym polu, usuwamy ją z tablicy możliwych cyfr*/
+        Set<Integer> valuesInSection = new HashSet<>();
+
+        for (int section = 0; section < 9; section++) {
+            valuesInSection.clear();
+
+            int finalSection = section;
+            valuesInSection = board.getListOfRows().stream()
+                    .flatMap(n -> n.getElementsInRow().stream())
+                    .filter(n -> n.getSection() == finalSection)
+                    .map(n -> n.getValue())
+                    .collect(Collectors.toSet());
+            valuesInSection.remove(-1);
+
+            Set<Integer> finalValuesInSection = valuesInSection;
+            board.getListOfRows().stream()
+                    .flatMap(n -> n.getElementsInRow().stream())
+                    .filter(n -> n.getSection() == finalSection)
+                    .map(n -> n.getPossibleValues())
+                    .forEach(n -> n.removeAll(finalValuesInSection));
+        }
+    }
+
+
 
     // UNIVERSAL OPERATIONS
     public void lastPossibleNumberInElement (SudokuBoard board) {
