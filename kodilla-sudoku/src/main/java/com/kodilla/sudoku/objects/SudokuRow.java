@@ -27,4 +27,18 @@ public class SudokuRow {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SudokuRow sudokuRow = (SudokuRow) o;
+
+        return elementsInRow != null ? elementsInRow.equals(sudokuRow.elementsInRow) : sudokuRow.elementsInRow == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return elementsInRow != null ? elementsInRow.hashCode() : 0;
+    }
 }

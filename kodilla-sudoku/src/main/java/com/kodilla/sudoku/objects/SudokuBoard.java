@@ -23,4 +23,32 @@ public class SudokuBoard {
             }
         }
     }
+
+    public SudokuBoard boardDeepCopy() throws CloneNotSupportedException {
+        SudokuBoard clonedBoard = (SudokuBoard) super.clone();
+        clonedBoard.listOfRows = new ArrayList<>();
+        for (SudokuRow row : listOfRows) {
+            SudokuRow clonedRow = new SudokuRow();
+            for (SudokuElement element : row.getElementsInRow()) {
+                clonedRow.getElementsInRow().add(element);
+            }
+            clonedBoard.getListOfRows().add(clonedRow);
+        }
+        return clonedBoard;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SudokuBoard that = (SudokuBoard) o;
+
+        return listOfRows != null ? listOfRows.equals(that.listOfRows) : that.listOfRows == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return listOfRows != null ? listOfRows.hashCode() : 0;
+    }
 }

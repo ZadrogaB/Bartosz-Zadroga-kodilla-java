@@ -18,7 +18,7 @@ public class SudokuController {
             valuesInRow.clear();
             for (int column = 0; column < board.getListOfRows().get(row).getElementsInRow().size(); column++) {  //iterowanie po kolejnych kolumnach w rzędzie
                 SudokuElement sudokuElement = board.getListOfRows().get(row).getElementsInRow().get(column);
-                if(sudokuElement.getValue() != -1) {
+                if (sudokuElement.getValue() != -1) {
                     valuesInRow.add(sudokuElement.getValue());
                 }
             }
@@ -28,12 +28,12 @@ public class SudokuController {
         }
     }
 
-    public void lastPossibleInRow (SudokuBoard board) throws UnresolvedSudokuException {
+    public void lastPossibleInRow(SudokuBoard board) throws UnresolvedSudokuException {
         /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
           jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
-        Map<Integer,Integer> elements = new HashMap<>();
+        Map<Integer, Integer> elements = new HashMap<>();
 
-        for(SudokuRow row : board.getListOfRows()) {
+        for (SudokuRow row : board.getListOfRows()) {
             Set<Integer> allValuesInRow = row.getElementsInRow().stream()
                     .map(n -> n.getValue())
                     .collect(Collectors.toSet());
@@ -46,12 +46,11 @@ public class SudokuController {
                     .flatMap(n -> n.getPossibleValues().stream())
                     .forEach(n -> finalElements.put(n, finalElements.get(n) + 1));
 
-            for (Integer key : finalElements.keySet()){
+            for (Integer key : finalElements.keySet()) {
                 if (finalElements.get(key) == 1) {
                     row.getElementsInRow().stream()
                             .filter(n -> n.getPossibleValues().contains(key))
                             .forEach(n -> n.setValue(key));
-
                 } else if (finalElements.get(key) == 0) {
                     if (!allValuesInRow.contains(key)) {
                         throw new UnresolvedSudokuException();
@@ -71,7 +70,7 @@ public class SudokuController {
             valuesInColumn.clear();
             for (int row = 0; row < 9; row++) {
                 SudokuElement sudokuElement = board.getListOfRows().get(row).getElementsInRow().get(column);
-                if(sudokuElement.getValue() != -1) {
+                if (sudokuElement.getValue() != -1) {
                     valuesInColumn.add(sudokuElement.getValue());
                 }
             }
@@ -83,10 +82,10 @@ public class SudokuController {
         }
     }
 
-    public void lastPossibleInColumn (SudokuBoard board) throws UnresolvedSudokuException {
+    public void lastPossibleInColumn(SudokuBoard board) throws UnresolvedSudokuException {
         /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
           jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
-        Map<Integer,Integer> elements = new HashMap<>();
+        Map<Integer, Integer> elements = new HashMap<>();
         List<SudokuElement> allElementsInColumn = new ArrayList<>();
         Set<Integer> allValuesInColumn = new HashSet<>();
 
@@ -105,21 +104,7 @@ public class SudokuController {
             elements = lastPossibleInRowCreateElements(elements);
             Map<Integer, Integer> finalElements = elements;
 
-            allElementsInColumn.stream()
-                    .flatMap(n -> n.getPossibleValues().stream())
-                    .forEach(n -> finalElements.put(n, finalElements.get(n) + 1));
-
-            for (Integer key : finalElements.keySet()){
-                if (finalElements.get(key) == 1) {
-                    allElementsInColumn.stream()
-                            .filter(n -> n.getPossibleValues().contains(key))
-                            .forEach(n -> n.setValue(key));
-                } else if (finalElements.get(key) == 0) {
-                    if (!allValuesInColumn.contains(key)) {
-                        throw new UnresolvedSudokuException();
-                    }
-                }
-            }
+            appearOneOrZeroTimesInPossibleNumbers(allElementsInColumn, allValuesInColumn, finalElements);
         }
     }
 
@@ -149,10 +134,38 @@ public class SudokuController {
         }
     }
 
+    public void lastPossibleInSection(SudokuBoard board) throws UnresolvedSudokuException {
+        /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
+          jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
+        Map<Integer, Integer> elements = new HashMap<>();
+        List<SudokuElement> allElementsInSection = new ArrayList<>();
+        Set<Integer> allValuesInSection = new HashSet<>();
+
+        for (int section = 0; section < 9; section++) {
+            allElementsInSection.clear();
+            allValuesInSection.clear();
+
+            int finalSection = section;
+            allElementsInSection = board.getListOfRows().stream()
+                    .flatMap(n -> n.getElementsInRow().stream())
+                    .filter(n -> n.getSection() == finalSection)
+                    .collect(Collectors.toList());
+
+            allValuesInSection = allElementsInSection.stream()
+                    .map(n -> n.getValue())
+                    .collect(Collectors.toSet());
+            allValuesInSection.remove(-1);
+
+            elements = lastPossibleInRowCreateElements(elements);
+            Map<Integer, Integer> finalElements = elements;
+
+            appearOneOrZeroTimesInPossibleNumbers(allElementsInSection, allValuesInSection, finalElements);
+        }
+    }
 
 
     // UNIVERSAL OPERATIONS
-    public void lastPossibleNumberInElement (SudokuBoard board) {
+    public void lastPossibleNumberInElement(SudokuBoard board) {
         /*jeśli została tylko jedna możliwa cyfra, wpisujemy ją do aktualnego pola*/
         List<SudokuElement> elements = board.getListOfRows().stream()
                 .flatMap(n -> n.getElementsInRow().stream())
@@ -163,15 +176,36 @@ public class SudokuController {
                 .forEach(n -> n.setValue(n.getPossibleValues().get(0)));
     }
 
-    private Map<Integer,Integer> lastPossibleInRowCreateElements(Map<Integer,Integer> elements) {
+
+    // INNER OPERATIONS
+    private Map<Integer, Integer> lastPossibleInRowCreateElements(Map<Integer, Integer> elements) {
         /*tworzenie elementów dla lastPossibleInRow*/
         elements.clear();
-        for (int i = 1; i < 10 ; i++) {
+        for (int i = 1; i < 10; i++) {
             elements.put(i, 0);
         }
         return elements;
     }
 
+    private void appearOneOrZeroTimesInPossibleNumbers(List<SudokuElement> allElementsInSection,
+                                                       Set<Integer> allValuesInSection,
+                                                       Map<Integer, Integer> finalElements) throws UnresolvedSudokuException {
+        allElementsInSection.stream()
+                .flatMap(n -> n.getPossibleValues().stream())
+                .forEach(n -> finalElements.put(n, finalElements.get(n) + 1));
+
+        for (Integer key : finalElements.keySet()) {
+            if (finalElements.get(key) == 1) {
+                allElementsInSection.stream()
+                        .filter(n -> n.getPossibleValues().contains(key))
+                        .forEach(n -> n.setValue(key));
+            } else if (finalElements.get(key) == 0) {
+                if (!allValuesInSection.contains(key)) {
+                    throw new UnresolvedSudokuException();
+                }
+            }
+        }
+    }
 
 
 }

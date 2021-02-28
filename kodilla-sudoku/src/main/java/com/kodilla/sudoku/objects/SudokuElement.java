@@ -46,4 +46,22 @@ public class SudokuElement {
             return "    ";
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SudokuElement that = (SudokuElement) o;
+
+        if (value != that.value) return false;
+        return possibleValues != null ? possibleValues.equals(that.possibleValues) : that.possibleValues == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value;
+        result = 31 * result + (possibleValues != null ? possibleValues.hashCode() : 0);
+        return result;
+    }
 }
