@@ -41,7 +41,7 @@ public class SudokuElement {
     @Override
     public String toString() {
         if (value != EMPTY) {
-            return "  " + value + "  ";
+            return  " " + value + "  ";
         } else {
             return "    ";
         }

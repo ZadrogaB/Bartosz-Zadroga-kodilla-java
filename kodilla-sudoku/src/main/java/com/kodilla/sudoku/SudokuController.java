@@ -53,6 +53,7 @@ public class SudokuController {
                             .forEach(n -> n.setValue(key));
                 } else if (finalElements.get(key) == 0) {
                     if (!allValuesInRow.contains(key)) {
+                        System.out.println("Błąd1");
                         throw new UnresolvedSudokuException();
                     }
                 }
@@ -174,6 +175,18 @@ public class SudokuController {
 
         elements.stream()
                 .forEach(n -> n.setValue(n.getPossibleValues().get(0)));
+    }
+
+    public boolean isSudokuSolved(SudokuBoard board) {
+        boolean isSolved = false;
+        List<SudokuElement> numberOfFilledElements = board.getListOfRows().stream()
+                .flatMap(n -> n.getElementsInRow().stream())
+                .filter(n -> n.getValue() != -1)
+                .collect(Collectors.toList());
+        if(numberOfFilledElements.size()==81) {
+            isSolved=true;
+        }
+        return isSolved;
     }
 
 
