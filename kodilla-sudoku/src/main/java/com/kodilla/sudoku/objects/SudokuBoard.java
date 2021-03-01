@@ -41,7 +41,6 @@ public class SudokuBoard implements Cloneable{
         return clonedBoard;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,6 +48,11 @@ public class SudokuBoard implements Cloneable{
 
         SudokuBoard board = (SudokuBoard) o;
 
-        return listOfRows != null ? listOfRows.equals(board.listOfRows) : board.listOfRows == null;
+        return listOfRows.equals(board.listOfRows);
+    }
+
+    @Override
+    public int hashCode() {
+        return listOfRows.hashCode();
     }
 }

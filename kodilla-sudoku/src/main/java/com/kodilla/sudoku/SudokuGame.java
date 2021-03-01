@@ -63,6 +63,7 @@ public class SudokuGame {
 
             if (board.equals(boardDeepCopy)){
                 System.out.println("Nie mozna rozwiazac sudoku");
+                break;
             } else {
                 boardDeepCopy = board.boardDeepCopy();
             }

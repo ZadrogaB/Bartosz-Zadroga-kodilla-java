@@ -15,7 +15,6 @@ public class SudokuRow {
     }
 
     public void drawSudokuRows() {
-
         for (int i = 1; i < 10; i++) {
             if (i % 3 != 0 && i != 10) {
                 System.out.print(elementsInRow.get(i - 1));

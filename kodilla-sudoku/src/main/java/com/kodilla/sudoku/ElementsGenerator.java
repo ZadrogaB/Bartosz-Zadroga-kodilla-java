@@ -6,7 +6,7 @@ import com.kodilla.sudoku.objects.SudokuRow;
 
 public class ElementsGenerator {
 
-    public SudokuBoard boardGenerator () {
+    public SudokuBoard boardGenerator() {
         SudokuBoard board = new SudokuBoard();
 
         for (int i = 0; i < 9; i++) {
