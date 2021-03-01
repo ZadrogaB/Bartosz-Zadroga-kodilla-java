@@ -31,7 +31,7 @@ public class SudokuGame {
             System.out.println("Aby zakonczyc dodawanie wartosci wpisz SUDOKU");
             scanner.nextLine();
             start = scanner.nextLine();
-        } while (!start.equals("SUDOKU"));*/ // <-------- Wyłączone na czas testów SudokuController
+        } while (!start.equals("SUDOKU"));*/                // <-------- Wyłączone na czas testów SudokuController
 
         exampleSudoku(board);
         board.drawBoard();
@@ -57,13 +57,13 @@ public class SudokuGame {
             System.out.println();
             board.drawBoard();
             isSolved = controller.isSudokuSolved(board);
-            if (board.equals(boardDeepCopy)){
+            /*if (board.equals(boardDeepCopy)){
                 System.out.println("Nie mozna rozwiazac sudoku");
             } else {
                 boardDeepCopy = board.boardDeepCopy();
-            }
+            }*/                                                             //<------- Wyskakuje błąd klonowania
 
-        } while (isSolved);
+        } while (!isSolved);
     }
 
     public void exampleSudoku(SudokuBoard board) {

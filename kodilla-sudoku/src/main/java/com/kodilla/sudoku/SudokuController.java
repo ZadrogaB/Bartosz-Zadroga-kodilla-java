@@ -114,7 +114,7 @@ public class SudokuController {
         /*jeśli ta cyfra jest wpisana w innym polu, usuwamy ją z tablicy możliwych cyfr*/
         Set<Integer> valuesInSection = new HashSet<>();
 
-        for (int section = 0; section < 9; section++) {
+        for (int section = 1; section < 10; section++) {
             valuesInSection.clear();
 
             int finalSection = section;
@@ -141,7 +141,7 @@ public class SudokuController {
         List<SudokuElement> allElementsInSection = new ArrayList<>();
         Set<Integer> allValuesInSection = new HashSet<>();
 
-        for (int section = 0; section < 9; section++) {
+        for (int section = 1; section < 10; section++) {
             allElementsInSection.clear();
             allValuesInSection.clear();
 
