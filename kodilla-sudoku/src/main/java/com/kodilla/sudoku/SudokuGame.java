@@ -37,22 +37,22 @@ public class SudokuGame {
         board.drawBoard();
 
         do {
-            controller.removingPossibleValuesFromValues(board);
             //Rows
             controller.removingValuesFromPossibleValuesRows(board);
             controller.lastPossibleNumberInElement(board);
-            System.out.println("Test 1");
             controller.lastPossibleInRow(board);
+            controller.removingPossibleValuesFromValues(board);
             //Columns
             controller.removingValuesFromPossibleValuesColumns(board);
             controller.lastPossibleNumberInElement(board);
+            board.drawBoard();
             controller.lastPossibleInColumn(board);
-            System.out.println("Test 2");
+            controller.removingPossibleValuesFromValues(board);
             //Sections
             controller.removingValuesFromPossibleValuesSection(board);
             controller.lastPossibleNumberInElement(board);
-            System.out.println("Test 3");
             controller.lastPossibleInSection(board);
+            controller.removingPossibleValuesFromValues(board);
 
             System.out.println();
             board.drawBoard();
