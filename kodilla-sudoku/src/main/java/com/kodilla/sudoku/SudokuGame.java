@@ -37,22 +37,24 @@ public class SudokuGame {
         board.drawBoard();
 
         do {
+            controller.removingPossibleValuesFromValues(board);
             //Rows
             controller.removingValuesFromPossibleValuesRows(board);
-            System.out.println("Test 1");
             controller.lastPossibleNumberInElement(board);
+            System.out.println("Test 1");
             controller.lastPossibleInRow(board);
             //Columns
             controller.removingValuesFromPossibleValuesColumns(board);
-            System.out.println("Test 2");
             controller.lastPossibleNumberInElement(board);
             controller.lastPossibleInColumn(board);
+            System.out.println("Test 2");
             //Sections
             controller.removingValuesFromPossibleValuesSection(board);
-            System.out.println("Test 3");
             controller.lastPossibleNumberInElement(board);
+            System.out.println("Test 3");
             controller.lastPossibleInSection(board);
 
+            System.out.println();
             board.drawBoard();
             isSolved = controller.isSudokuSolved(board);
             if (board.equals(boardDeepCopy)){

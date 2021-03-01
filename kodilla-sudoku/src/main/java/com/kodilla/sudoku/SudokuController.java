@@ -53,7 +53,6 @@ public class SudokuController {
                             .forEach(n -> n.setValue(key));
                 } else if (finalElements.get(key) == 0) {
                     if (!allValuesInRow.contains(key)) {
-                        System.out.println("Błąd1");
                         throw new UnresolvedSudokuException();
                     }
                 }
@@ -177,6 +176,13 @@ public class SudokuController {
                 .forEach(n -> n.setValue(n.getPossibleValues().get(0)));
     }
 
+    public void removingPossibleValuesFromValues(SudokuBoard board) {
+        board.getListOfRows().stream()
+                .flatMap(n -> n.getElementsInRow().stream())
+                .filter(n -> n.getValue() != -1)
+                .forEach(n -> n.getPossibleValues().clear());
+    }
+
     public boolean isSudokuSolved(SudokuBoard board) {
         boolean isSolved = false;
         List<SudokuElement> numberOfFilledElements = board.getListOfRows().stream()
@@ -200,20 +206,20 @@ public class SudokuController {
         return elements;
     }
 
-    private void appearOneOrZeroTimesInPossibleNumbers(List<SudokuElement> allElementsInSection,
-                                                       Set<Integer> allValuesInSection,
+    private void appearOneOrZeroTimesInPossibleNumbers(List<SudokuElement> allElements,
+                                                       Set<Integer> allValues,
                                                        Map<Integer, Integer> finalElements) throws UnresolvedSudokuException {
-        allElementsInSection.stream()
+        allElements.stream()
                 .flatMap(n -> n.getPossibleValues().stream())
                 .forEach(n -> finalElements.put(n, finalElements.get(n) + 1));
 
         for (Integer key : finalElements.keySet()) {
             if (finalElements.get(key) == 1) {
-                allElementsInSection.stream()
+                allElements.stream()
                         .filter(n -> n.getPossibleValues().contains(key))
                         .forEach(n -> n.setValue(key));
             } else if (finalElements.get(key) == 0) {
-                if (!allValuesInSection.contains(key)) {
+                if (!allValues.contains(key)) {
                     throw new UnresolvedSudokuException();
                 }
             }
