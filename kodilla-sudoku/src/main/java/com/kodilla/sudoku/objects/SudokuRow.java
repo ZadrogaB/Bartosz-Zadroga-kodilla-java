@@ -32,9 +32,9 @@ public class SudokuRow {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SudokuRow sudokuRow = (SudokuRow) o;
+        SudokuRow row = (SudokuRow) o;
 
-        return elementsInRow != null ? elementsInRow.equals(sudokuRow.elementsInRow) : sudokuRow.elementsInRow == null;
+        return elementsInRow != null ? elementsInRow.equals(row.elementsInRow) : row.elementsInRow == null;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class SudokuGame {
         ElementsGenerator elementsGenerator = new ElementsGenerator();
         SudokuController controller = new SudokuController();
         SudokuBoard board = elementsGenerator.boardGenerator();
-        SudokuBoard boardDeepCopy = elementsGenerator.boardGenerator();
+        SudokuBoard boardDeepCopy = new SudokuBoard();
 
         board.drawBoard();
         /*do {
@@ -33,7 +33,7 @@ public class SudokuGame {
             start = scanner.nextLine();
         } while (!start.equals("SUDOKU"));*/                // <-------- Wyłączone na czas testów SudokuController
 
-        exampleSudokuWithoutGuessingTwo(board);
+        exampleSudokuWithoutGuessingOne(board);
         board.drawBoard();
         controller.removingPossibleValuesFromValues(board);
 
@@ -60,12 +60,12 @@ public class SudokuGame {
             board.drawBoard();
 
             isSolved = controller.isSudokuSolved(board);
-            /*if (board.equals(boardDeepCopy)){
+
+            if (board.equals(boardDeepCopy)){
                 System.out.println("Nie mozna rozwiazac sudoku");
             } else {
                 boardDeepCopy = board.boardDeepCopy();
-            }*/                                                             //<------- Wyskakuje błąd klonowania
-
+            }
         } while (!isSolved);
     }
 

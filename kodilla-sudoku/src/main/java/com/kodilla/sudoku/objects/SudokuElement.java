@@ -55,6 +55,7 @@ public class SudokuElement {
         SudokuElement that = (SudokuElement) o;
 
         if (value != that.value) return false;
+        if (section != that.section) return false;
         return possibleValues != null ? possibleValues.equals(that.possibleValues) : that.possibleValues == null;
     }
 
@@ -62,6 +63,7 @@ public class SudokuElement {
     public int hashCode() {
         int result = value;
         result = 31 * result + (possibleValues != null ? possibleValues.hashCode() : 0);
+        result = 31 * result + section;
         return result;
     }
 }

@@ -3,8 +3,9 @@ package com.kodilla.sudoku.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class SudokuBoard {
+public class SudokuBoard implements Cloneable{
     private List<SudokuRow> listOfRows = new ArrayList<>();
 
     public List<SudokuRow> getListOfRows() {
@@ -30,25 +31,24 @@ public class SudokuBoard {
         for (SudokuRow row : listOfRows) {
             SudokuRow clonedRow = new SudokuRow();
             for (SudokuElement element : row.getElementsInRow()) {
-                clonedRow.getElementsInRow().add(element);
+                SudokuElement sudokuElement = new SudokuElement(element.getSection());
+                sudokuElement.setValue(element.getValue());
+                sudokuElement.setPossibleValues(element.getPossibleValues());
+                clonedRow.getElementsInRow().add(sudokuElement);
             }
             clonedBoard.getListOfRows().add(clonedRow);
         }
         return clonedBoard;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SudokuBoard that = (SudokuBoard) o;
+        SudokuBoard board = (SudokuBoard) o;
 
-        return listOfRows != null ? listOfRows.equals(that.listOfRows) : that.listOfRows == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return listOfRows != null ? listOfRows.hashCode() : 0;
+        return listOfRows != null ? listOfRows.equals(board.listOfRows) : board.listOfRows == null;
     }
 }
