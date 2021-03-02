@@ -30,6 +30,15 @@ public class SudokuElement {
         this.possibleValues = possibleValues;
     }
 
+    public void addPossibleValue(int value) {
+        this.possibleValues.add(value);
+    }
+
+    public void removePossibleValue(int value) {
+        this.possibleValues.remove(value);
+    }
+
+
     public int getValue() {
         return value;
     }

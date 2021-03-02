@@ -33,7 +33,9 @@ public class SudokuBoard implements Cloneable{
             for (SudokuElement element : row.getElementsInRow()) {
                 SudokuElement sudokuElement = new SudokuElement(element.getSection());
                 sudokuElement.setValue(element.getValue());
-                sudokuElement.setPossibleValues(element.getPossibleValues());
+                for (int value : element.getPossibleValues()) {
+                    sudokuElement.addPossibleValue(value);
+                }
                 clonedRow.getElementsInRow().add(sudokuElement);
             }
             clonedBoard.getListOfRows().add(clonedRow);

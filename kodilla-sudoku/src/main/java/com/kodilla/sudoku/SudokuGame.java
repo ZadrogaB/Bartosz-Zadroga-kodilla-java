@@ -33,7 +33,7 @@ public class SudokuGame {
             start = scanner.nextLine();
         } while (!start.equals("SUDOKU"));*/                // <-------- Wyłączone na czas testów SudokuController
 
-        exampleSudokuWithoutGuessingOne(board);
+        exampleSudokuWithoutGuessingThree(board);
         board.drawBoard();
         controller.removingPossibleValuesFromValues(board);
 
@@ -70,6 +70,7 @@ public class SudokuGame {
         } while (!isSolved);
     }
 
+    // SUDOKU WITHOUT GUESSING
     public void exampleSudokuWithoutGuessingOne(SudokuBoard board) {
         board.getListOfRows().get(0).getElementsInRow().get(0).setValue(9);
         board.getListOfRows().get(0).getElementsInRow().get(1).setValue(3);
@@ -192,4 +193,42 @@ public class SudokuGame {
         board.getListOfRows().get(8).getElementsInRow().get(8).setValue(4);
 
     }
+
+    // SUDOKU WITH GUESSING
+    public void exampleSudokuWithoutGuessingThree(SudokuBoard board) {
+        board.getListOfRows().get(0).getElementsInRow().get(0).setValue(9);
+        board.getListOfRows().get(0).getElementsInRow().get(5).setValue(4);
+        board.getListOfRows().get(0).getElementsInRow().get(6).setValue(2);
+        board.getListOfRows().get(0).getElementsInRow().get(7).setValue(8);
+
+        board.getListOfRows().get(1).getElementsInRow().get(3).setValue(6);
+
+        board.getListOfRows().get(2).getElementsInRow().get(2).setValue(5);
+        board.getListOfRows().get(2).getElementsInRow().get(4).setValue(7);
+        board.getListOfRows().get(2).getElementsInRow().get(8).setValue(6);
+
+        board.getListOfRows().get(3).getElementsInRow().get(2).setValue(4);
+        board.getListOfRows().get(3).getElementsInRow().get(3).setValue(8);
+        board.getListOfRows().get(3).getElementsInRow().get(4).setValue(1);
+
+        board.getListOfRows().get(4).getElementsInRow().get(7).setValue(3);
+
+        board.getListOfRows().get(5).getElementsInRow().get(2).setValue(1);
+        board.getListOfRows().get(5).getElementsInRow().get(4).setValue(5);
+        board.getListOfRows().get(5).getElementsInRow().get(5).setValue(7);
+
+        board.getListOfRows().get(6).getElementsInRow().get(0).setValue(6);
+
+        board.getListOfRows().get(7).getElementsInRow().get(1).setValue(2);
+        board.getListOfRows().get(7).getElementsInRow().get(3).setValue(7);
+        board.getListOfRows().get(7).getElementsInRow().get(4).setValue(8);
+        board.getListOfRows().get(7).getElementsInRow().get(6).setValue(5);
+        board.getListOfRows().get(7).getElementsInRow().get(7).setValue(6);
+
+        board.getListOfRows().get(8).getElementsInRow().get(3).setValue(1);
+        board.getListOfRows().get(8).getElementsInRow().get(4).setValue(2);
+        board.getListOfRows().get(8).getElementsInRow().get(8).setValue(7);
+
+    }
+
 }
