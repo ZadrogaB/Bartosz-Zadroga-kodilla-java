@@ -22,23 +22,23 @@ public class SudokuGame {
 
 
         board.drawBoard();
-        do {
-        /*do {
-            System.out.println("W ktorym rzedzie chcesz dodac wartosc?");
-            int row = scanner.nextInt() - 1;
-            System.out.println("W ktorej kolumnie chcesz dodac wartosc?");
-            int column = scanner.nextInt() - 1;
-            System.out.println("Podaj wartosc do wprowadzenia (1-9)");
-            int value = scanner.nextInt();
-            board.getListOfRows().get(row).getElementsInRow().get(column).setValue(value);
-            board.drawBoard();
+//        do {
+//        do {
+//            System.out.println("W ktorym rzedzie chcesz dodac wartosc?");
+//            int row = scanner.nextInt() - 1;
+//            System.out.println("W ktorej kolumnie chcesz dodac wartosc?");
+//            int column = scanner.nextInt() - 1;
+//            System.out.println("Podaj wartosc do wprowadzenia (1-9)");
+//            int value = scanner.nextInt();
+//            board.getListOfRows().get(row).getElementsInRow().get(column).setValue(value);
+//            board.drawBoard();
+//
+//            System.out.println("Aby zakonczyc dodawanie wartosci wpisz SUDOKU");
+//            scanner.nextLine();
+//            start = scanner.nextLine();
+//        } while (!start.equals("SUDOKU"));                // <-------- Wyłączone na czas testów SudokuController
 
-            System.out.println("Aby zakonczyc dodawanie wartosci wpisz SUDOKU");
-            scanner.nextLine();
-            start = scanner.nextLine();
-        } while (!start.equals("SUDOKU"));   */             // <-------- Wyłączone na czas testów SudokuController
-
-            exampleSudokuWithoutGuessingFive(board);
+            exampleSudokuWithoutGuessingFour(board);
             board.drawBoard();
             System.out.println();
             controller.removingPossibleValuesFromValues(board);
@@ -72,7 +72,6 @@ public class SudokuGame {
                     controller.needToDoBacktrack = true;
                     checkBacktrackNeed();
                 }
-
                 if (board.equals(boardDeepCopy)) {
                     guessingOperation();
                 } else {
@@ -83,9 +82,9 @@ public class SudokuGame {
             board.cleanBoard();
             board = elementsGenerator.boardGenerator();
 
-            promptEnterKey();
+//            promptEnterKey();
 
-        } while(true);
+//        } while(true);
     }
 
     public void promptEnterKey(){
@@ -99,8 +98,8 @@ public class SudokuGame {
         System.out.println("Zgadywanie liczby i wykonanie kopii");
 
         Backtrack lastBacktrack = backtrackList.get(backtrackList.size()-1);
-        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).setValue(lastBacktrack.getValue());
-        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).getPossibleValues().clear();
+//        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).setValue(lastBacktrack.getValue());
+        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).removePossibleValue(lastBacktrack.getValue());
         board.drawBoard();
     }
 

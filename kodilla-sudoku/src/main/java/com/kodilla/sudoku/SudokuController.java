@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class SudokuController {
     boolean needToDoBacktrack = false;
     Set<Integer> allInRow = new LinkedHashSet<>();
-    private List<SudokuElement> oldElements = new ArrayList<>();
+//    private List<SudokuElement> previouslyUsedElements = new ArrayList<>();
 
     // OPERATIONS FOR ROWS
     public void removingValuesFromPossibleValuesRows(SudokuBoard board) {
@@ -220,14 +220,23 @@ public class SudokuController {
         List<SudokuElement> elementsWithoutValue = board.getListOfRows().stream()
                 .flatMap(n -> n.getElementsInRow().stream())
                 .filter(n -> n.getValue() == -1)
-                .filter(n -> n.getPossibleValues().size()>0)
+//                .filter(n -> !previouslyUsedElements.contains(n))
                 .collect(Collectors.toList());
 
-        int column = elementsWithoutValue.get(0).getColumn();
-        int row = elementsWithoutValue.get(0).getRow();
+//        for (SudokuElement usedElement : previouslyUsedElements) {
+//            elementsWithoutValue.stream()
+//                    .filter(n -> n.getColumn() == usedElement.getColumn() && n.getRow() == usedElement.getRow())
+//                    .forEach(n -> elementsWithoutValue.remove(n));
+//        }
+
+        int row = elementsWithoutValue.get(0).getColumn();
+        int column = elementsWithoutValue.get(0).getRow();
         List<Integer> values = elementsWithoutValue.get(0).getPossibleValues().stream()
                 .collect(Collectors.toList());
         int value = values.get(0);
+        SudokuElement newSudokuElement = new SudokuElement(elementsWithoutValue.get(0).getSection(), row, column);
+        newSudokuElement.setValue(value);
+//        previouslyUsedElements.add(newSudokuElement);
 
         SudokuBoard boardDeepCopy = board.boardDeepCopy();
 

@@ -30,8 +30,8 @@ public class SudokuElement {
             this.possibleValues.add(i);
         }
         this.section = section;
-        this.row = column;
-        this.column = row;
+        this.row = row;
+        this.column = column;
     }
 
     public void setValue(int value) {
