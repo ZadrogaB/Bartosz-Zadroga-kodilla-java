@@ -1,14 +1,12 @@
 package com.kodilla.sudoku;
 
-import com.kodilla.sudoku.objects.SudokuBoard;
-import com.kodilla.sudoku.objects.SudokuElement;
-import com.kodilla.sudoku.objects.SudokuRow;
-import com.kodilla.sudoku.objects.UnresolvedSudokuException;
+import com.kodilla.sudoku.objects.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class SudokuController {
+    boolean needToDoBacktrack = false;
 
     // OPERATIONS FOR ROWS
     public void removingValuesFromPossibleValuesRows(SudokuBoard board) {
@@ -28,7 +26,7 @@ public class SudokuController {
         }
     }
 
-    public void lastPossibleInRow(SudokuBoard board) throws UnresolvedSudokuException {
+    public void lastPossibleInRow(SudokuBoard board, List<Backtrack> backtrackList) throws UnresolvedSudokuException {
         /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
           jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
         Map<Integer, Integer> elements = new HashMap<>();
@@ -52,7 +50,9 @@ public class SudokuController {
                             .filter(n -> n.getPossibleValues().contains(key))
                             .forEach(n -> n.setValue(key));
                 } else if (finalElements.get(key) == 0) {
-                    if (!allValuesInRow.contains(key)) {
+                    if (!allValuesInRow.contains(key) && backtrackList.size()!=0) {
+                        needToDoBacktrack = true;
+                    } else if (!allValuesInRow.contains(key)) {
                         throw new UnresolvedSudokuException();
                     }
                 }
@@ -82,7 +82,7 @@ public class SudokuController {
         }
     }
 
-    public void lastPossibleInColumn(SudokuBoard board) throws UnresolvedSudokuException {
+    public void lastPossibleInColumn(SudokuBoard board, List<Backtrack> backtrackList) throws UnresolvedSudokuException {
         /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
           jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
         Map<Integer, Integer> elements = new HashMap<>();
@@ -104,7 +104,7 @@ public class SudokuController {
             elements = lastPossibleInRowCreateElements(elements);
             Map<Integer, Integer> finalElements = elements;
 
-            appearOneOrZeroTimesInPossibleNumbers(allElementsInColumn, allValuesInColumn, finalElements);
+            appearOneOrZeroTimesInPossibleNumbers(allElementsInColumn, allValuesInColumn, finalElements,backtrackList);
         }
     }
 
@@ -134,7 +134,7 @@ public class SudokuController {
         }
     }
 
-    public void lastPossibleInSection(SudokuBoard board) throws UnresolvedSudokuException {
+    public void lastPossibleInSection(SudokuBoard board, List<Backtrack> backtrackList) throws UnresolvedSudokuException {
         /*nie występuje ani jako wpisana, ani jako możliwa cyfra w innym polu, wpisujemy ją do aktualnego pola,
           jeśli ta cyfra jest wpisana w innym polu, ale jest też jedyną możliwością w aktualnym polu, algorytm zwraca błąd */
         Map<Integer, Integer> elements = new HashMap<>();
@@ -159,7 +159,7 @@ public class SudokuController {
             elements = lastPossibleInRowCreateElements(elements);
             Map<Integer, Integer> finalElements = elements;
 
-            appearOneOrZeroTimesInPossibleNumbers(allElementsInSection, allValuesInSection, finalElements);
+            appearOneOrZeroTimesInPossibleNumbers(allElementsInSection, allValuesInSection, finalElements, backtrackList);
         }
     }
 
@@ -195,6 +195,24 @@ public class SudokuController {
         return isSolved;
     }
 
+    public Backtrack guessingOperation(SudokuBoard board) throws CloneNotSupportedException {
+        List<SudokuElement> elementsWithoutValue = board.getListOfRows().stream()
+                .flatMap(n -> n.getElementsInRow().stream())
+                .filter(n -> n.getValue() == -1)
+                .collect(Collectors.toList());
+
+        int column = elementsWithoutValue.get(0).getColumn();
+        int row = elementsWithoutValue.get(0).getRow();
+        List<Integer> values = elementsWithoutValue.get(0).getPossibleValues().stream()
+                .collect(Collectors.toList());
+        int value = values.get(0);
+
+        SudokuBoard boardDeepCopy = board.boardDeepCopy(true);
+
+
+        return new Backtrack(boardDeepCopy, value, row, column);
+    }
+
 
     // INNER OPERATIONS
     private Map<Integer, Integer> lastPossibleInRowCreateElements(Map<Integer, Integer> elements) {
@@ -208,7 +226,8 @@ public class SudokuController {
 
     private void appearOneOrZeroTimesInPossibleNumbers(List<SudokuElement> allElements,
                                                        Set<Integer> allValues,
-                                                       Map<Integer, Integer> finalElements) throws UnresolvedSudokuException {
+                                                       Map<Integer, Integer> finalElements,
+                                                       List<Backtrack> backtrackList) throws UnresolvedSudokuException {
         allElements.stream()
                 .flatMap(n -> n.getPossibleValues().stream())
                 .forEach(n -> finalElements.put(n, finalElements.get(n) + 1));
@@ -219,12 +238,16 @@ public class SudokuController {
                         .filter(n -> n.getPossibleValues().contains(key))
                         .forEach(n -> n.setValue(key));
             } else if (finalElements.get(key) == 0) {
-                if (!allValues.contains(key)) {
+                if (!allValues.contains(key) && backtrackList.size()!=0) {
+                    needToDoBacktrack = true;
+                } else if (!allValues.contains(key)) {
                     throw new UnresolvedSudokuException();
                 }
             }
         }
     }
+
+
 
 
 }

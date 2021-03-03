@@ -25,20 +25,25 @@ public class SudokuBoard implements Cloneable{
         }
     }
 
-    public SudokuBoard boardDeepCopy() throws CloneNotSupportedException {
+    public SudokuBoard boardDeepCopy(boolean isBacktrack) throws CloneNotSupportedException {
         SudokuBoard clonedBoard = (SudokuBoard) super.clone();
         clonedBoard.listOfRows = new ArrayList<>();
         for (SudokuRow row : listOfRows) {
             SudokuRow clonedRow = new SudokuRow();
             for (SudokuElement element : row.getElementsInRow()) {
-                SudokuElement sudokuElement = new SudokuElement(element.getSection());
+                SudokuElement sudokuElement = new SudokuElement(element.getSection(), element.getRow(), element.getColumn());
                 sudokuElement.setValue(element.getValue());
-                for (int value : element.getPossibleValues()) {
-                    sudokuElement.addPossibleValue(value);
+                if(!isBacktrack) {
+                    sudokuElement.setPossibleValues(element.getPossibleValues());
+                } else {
+                    for (int value : element.getPossibleValues()) {
+                        sudokuElement.addPossibleValue(value);
+                    }
                 }
                 clonedRow.getElementsInRow().add(sudokuElement);
             }
             clonedBoard.getListOfRows().add(clonedRow);
+
         }
         return clonedBoard;
     }

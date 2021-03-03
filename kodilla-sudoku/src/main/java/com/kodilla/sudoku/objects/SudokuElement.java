@@ -9,17 +9,29 @@ public class SudokuElement {
     private int value;
     private List<Integer> possibleValues = new ArrayList<>();
     private int section;
+    private int row;
+    private int column;
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
 
     public int getSection() {
         return section;
     }
 
-    public SudokuElement(int section) {
+    public SudokuElement(int section, int row, int column) {
         this.value = EMPTY;
         for (int i=1; i<10; i++) {
             this.possibleValues.add(i);
         }
         this.section = section;
+        this.row = column;
+        this.column = row;
     }
 
     public void setValue(int value) {
@@ -34,8 +46,8 @@ public class SudokuElement {
         this.possibleValues.add(value);
     }
 
-    public void removePossibleValue(int value) {
-        this.possibleValues.remove(value);
+    public void removePossibleValue() {
+        this.possibleValues.remove(0);
     }
 
 

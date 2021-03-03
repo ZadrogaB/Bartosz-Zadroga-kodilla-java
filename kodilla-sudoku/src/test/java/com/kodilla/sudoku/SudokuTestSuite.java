@@ -45,11 +45,11 @@ public class SudokuTestSuite {
 
         //When
         SudokuBoard board = elementsGenerator.boardGenerator();
-        List<Integer> possibleValues = board.getListOfRows().get(0).getElementsInRow().get(0).getPossibleValues();
-        System.out.println(possibleValues);
+//        List<Integer> possibleValues = board.getListOfRows().get(0).getElementsInRow().get(0).getPossibleValues();
+//        System.out.println(possibleValues);
 
         //Then
-        assertEquals(9, possibleValues.size());
+//        assertEquals(9, possibleValues.size());
     }
 
     @Test
@@ -61,8 +61,8 @@ public class SudokuTestSuite {
         //When
         SudokuBoard board = elementsGenerator.boardGenerator();
         sudokuController.removingValuesFromPossibleValuesRows(board);
-        List<Integer> possibleValues = board.getListOfRows().get(0).getElementsInRow().get(0).getPossibleValues();
-        System.out.println(possibleValues);
+//        List<Integer> possibleValues = board.getListOfRows().get(0).getElementsInRow().get(0).getPossibleValues();
+//        System.out.println(possibleValues);
 
         //Then
 //        assertEquals(7, possibleValues.size()); //Działa gdy są wartości podane
@@ -76,11 +76,11 @@ public class SudokuTestSuite {
 
         //When
         SudokuBoard board = elementsGenerator.boardGenerator();
-        try {
-            sudokuController.lastPossibleInRow(board);
-        } catch (UnresolvedSudokuException e) {
-            System.out.println("Nie da sie rozwiazac tego Sudoku!");
-        }
+//        try {
+//            sudokuController.lastPossibleInRow(board);
+//        } catch (UnresolvedSudokuException e) {
+//            System.out.println("Nie da sie rozwiazac tego Sudoku!");
+//        }
 //        board.drawBoard();
     }
 }

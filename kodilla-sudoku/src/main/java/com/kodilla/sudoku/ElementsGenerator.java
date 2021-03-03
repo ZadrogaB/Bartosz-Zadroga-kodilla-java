@@ -13,7 +13,7 @@ public class ElementsGenerator {
             SudokuRow sudokuRow = new SudokuRow();
             for (int k = 0; k < 9; k++) {
                 int section = sectionCheck(i,k);
-                SudokuElement sudokuElement = new SudokuElement(section);
+                SudokuElement sudokuElement = new SudokuElement(section, k, i);
                 sudokuRow.addElement(sudokuElement);
             }
             board.addRow(sudokuRow);
