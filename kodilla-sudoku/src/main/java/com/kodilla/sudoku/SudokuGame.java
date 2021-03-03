@@ -34,7 +34,7 @@ public class SudokuGame {
             start = scanner.nextLine();
         } while (!start.equals("SUDOKU"));*/                // <-------- Wyłączone na czas testów SudokuController
 
-        exampleSudokuWithoutGuessingFour(board);
+        exampleSudokuWithoutGuessingTwo(board);
         board.drawBoard();
         System.out.println();
         controller.removingPossibleValuesFromValues(board);
@@ -87,24 +87,29 @@ public class SudokuGame {
             controller.needToDoBacktrack = false;
             board = backtrackList.get(backtrackList.size()-1).getBoardDeepCopy();
             Backtrack lastBacktrack = backtrackList.get(backtrackList.size()-1);
-            board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).removePossibleValue();
+            restartPossibleNumbers();
+            List<Integer> lastToRemove = new ArrayList<>();
+            lastToRemove.add(lastBacktrack.getValue());
+            board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).removePossibleValue(lastToRemove);
             System.out.println("Wykonano backtrack");
         }
     }
 
-    private void removeDuplicatedPossibleNumbers() {
-        for (SudokuRow row : board.getListOfRows()) {
-            for (SudokuElement element : row.getElementsInRow()){
-                Set<Integer> possibleValuesUnduplicated = new LinkedHashSet<>();
-                possibleValuesUnduplicated.addAll(element.getPossibleValues());
-                List<Integer> withoutDuplicates = new ArrayList<>();
-                withoutDuplicates.addAll(possibleValuesUnduplicated);
-                element.getPossibleValues().clear();
-                element.setPossibleValues(withoutDuplicates);
-            }
-        }
-    }
+    private void restartPossibleNumbers() {
+        board.getListOfRows().stream()
+                .flatMap(n -> n.getElementsInRow().stream())
+                .filter(n -> n.getValue() == -1)
+                .forEach(n -> n.getPossibleValues().clear());
 
+        List<Integer> allPossibleNumbers = new ArrayList<>();
+        for (int i=1; i<10; i++) {
+            allPossibleNumbers.add(i);
+        }
+        board.getListOfRows().stream()
+                .flatMap(n -> n.getElementsInRow().stream())
+                .filter(n -> n.getValue() == -1)
+                .forEach(n -> n.getPossibleValues().addAll(allPossibleNumbers));
+    }
     // SUDOKU WITHOUT GUESSING
     public void exampleSudokuWithoutGuessingOne(SudokuBoard board) {
         board.getListOfRows().get(0).getElementsInRow().get(0).setValue(9);
