@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class SudokuController {
     boolean needToDoBacktrack = false;
+    Set<Integer> allInRow = new LinkedHashSet<>();
+    private List<SudokuElement> oldElements = new ArrayList<>();
 
     // OPERATIONS FOR ROWS
     public void removingValuesFromPossibleValuesRows(SudokuBoard board) {
@@ -183,7 +185,7 @@ public class SudokuController {
                 .forEach(n -> n.getPossibleValues().clear());
     }
 
-    public boolean isSudokuSolved(SudokuBoard board) {
+    public boolean areAllElementsFilled(SudokuBoard board) {
         boolean isSolved = false;
         List<SudokuElement> numberOfFilledElements = board.getListOfRows().stream()
                 .flatMap(n -> n.getElementsInRow().stream())
@@ -195,10 +197,30 @@ public class SudokuController {
         return isSolved;
     }
 
+    public boolean isSudokuSolvedWell(SudokuBoard board) {
+        boolean isSolvedWell = true;
+
+
+        for(SudokuRow row : board.getListOfRows()) {
+            allInRow = row.getElementsInRow().stream()
+                    .filter(n -> n.getValue() != -1)
+                    .map(n -> n.getValue())
+                    .collect(Collectors.toSet());
+
+            if(allInRow.size() != 9) {
+                isSolvedWell=false;
+                break;
+            }
+        }
+
+        return isSolvedWell;
+    }
+
     public Backtrack guessingOperation(SudokuBoard board) throws CloneNotSupportedException {
         List<SudokuElement> elementsWithoutValue = board.getListOfRows().stream()
                 .flatMap(n -> n.getElementsInRow().stream())
                 .filter(n -> n.getValue() == -1)
+                .filter(n -> n.getPossibleValues().size()>0)
                 .collect(Collectors.toList());
 
         int column = elementsWithoutValue.get(0).getColumn();
@@ -207,14 +229,16 @@ public class SudokuController {
                 .collect(Collectors.toList());
         int value = values.get(0);
 
-        SudokuBoard boardDeepCopy = board.boardDeepCopy(true);
+        SudokuBoard boardDeepCopy = board.boardDeepCopy();
 
 
         return new Backtrack(boardDeepCopy, value, row, column);
     }
 
 
+
     // INNER OPERATIONS
+
     private Map<Integer, Integer> lastPossibleInRowCreateElements(Map<Integer, Integer> elements) {
         /*tworzenie elementów dla lastPossibleInRow*/
         elements.clear();

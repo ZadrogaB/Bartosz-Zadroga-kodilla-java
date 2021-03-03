@@ -46,8 +46,12 @@ public class SudokuElement {
         this.possibleValues.add(value);
     }
 
-    public void removePossibleValue(List<Integer> value) {
-        this.possibleValues.removeAll(value);
+    public void removePossibleValue(int value) {
+        for (int i=0; i<possibleValues.size(); i++) {
+            if (possibleValues.get(i).equals(value)) {
+                possibleValues.remove(i);
+            }
+        }
     }
 
 

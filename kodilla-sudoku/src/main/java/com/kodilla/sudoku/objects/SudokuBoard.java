@@ -25,7 +25,7 @@ public class SudokuBoard implements Cloneable{
         }
     }
 
-    public SudokuBoard boardDeepCopy(boolean isBacktrack) throws CloneNotSupportedException {
+    public SudokuBoard boardDeepCopy() throws CloneNotSupportedException {
         SudokuBoard clonedBoard = (SudokuBoard) super.clone();
         clonedBoard.listOfRows = new ArrayList<>();
         for (SudokuRow row : listOfRows) {
@@ -42,6 +42,10 @@ public class SudokuBoard implements Cloneable{
 
         }
         return clonedBoard;
+    }
+
+    public void cleanBoard() {
+        listOfRows.clear();
     }
 
     @Override
