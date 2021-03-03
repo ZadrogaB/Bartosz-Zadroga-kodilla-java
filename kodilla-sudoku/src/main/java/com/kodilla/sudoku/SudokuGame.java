@@ -36,7 +36,7 @@ public class SudokuGame {
             System.out.println("Aby zakonczyc dodawanie wartosci wpisz SUDOKU");
             scanner.nextLine();
             start = scanner.nextLine();
-        } while (!start.equals("SUDOKU"));*/                // <-------- Wyłączone na czas testów SudokuController
+        } while (!start.equals("SUDOKU"));   */             // <-------- Wyłączone na czas testów SudokuController
 
             exampleSudokuWithoutGuessingFive(board);
             board.drawBoard();
