@@ -38,7 +38,7 @@ public class SudokuGame {
 //            start = scanner.nextLine();
 //        } while (!start.equals("SUDOKU"));                // <-------- Wyłączone na czas testów SudokuController
 
-            exampleSudokuWithoutGuessingFour(board);
+            exampleSudokuWithoutGuessingFive(board);
             board.drawBoard();
             System.out.println();
             controller.removingPossibleValuesFromValues(board);
@@ -98,7 +98,7 @@ public class SudokuGame {
         System.out.println("Zgadywanie liczby i wykonanie kopii");
 
         Backtrack lastBacktrack = backtrackList.get(backtrackList.size()-1);
-//        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).setValue(lastBacktrack.getValue());
+        board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).setValue(lastBacktrack.getValue());
         board.getListOfRows().get(lastBacktrack.getRow()).getElementsInRow().get(lastBacktrack.getColumn()).removePossibleValue(lastBacktrack.getValue());
         board.drawBoard();
     }
@@ -393,7 +393,6 @@ public class SudokuGame {
         board.getListOfRows().get(8).getElementsInRow().get(5).setValue(7);
         board.getListOfRows().get(8).getElementsInRow().get(7).setValue(6);
     }
-
 
 
 }
