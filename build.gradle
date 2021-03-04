@@ -1,28 +1,8 @@
 plugins {
-//    id 'org.springframework.boot' version '2.3.8.RELEASE'
-//    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 
-group = 'com.kodilla'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-//repositories {
-//    mavenCentral()
-//}
-
 dependencies {
-//    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-//    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
-//    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-//    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
-}
 
-//test {
-//    useJUnitPlatform()
-//}
-//bootJar {
-//    enabled = false
-//}
+}
