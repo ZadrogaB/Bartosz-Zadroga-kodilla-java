@@ -10,4 +10,4 @@ include 'kodilla-patterns'
 include 'kodilla-stream'
 include 'kodilla-jdbc'
 include 'kodilla-sudoku'
-
+include 'kodilla-hibernate'
