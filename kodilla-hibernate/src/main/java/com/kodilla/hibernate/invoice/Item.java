@@ -13,7 +13,7 @@ public class Item {
     private int quantity;
     private BigDecimal value;
 
-    public Item( BigDecimal price, int quantity, BigDecimal value) {
+    public Item(BigDecimal price, int quantity, BigDecimal value) {
         this.price = price;
         this.quantity = quantity;
         this.value = value;
@@ -23,7 +23,7 @@ public class Item {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")
     public Product getProduct() {
         return product;
     }

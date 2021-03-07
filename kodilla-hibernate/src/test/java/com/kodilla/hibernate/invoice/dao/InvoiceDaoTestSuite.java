@@ -16,10 +16,6 @@ public class InvoiceDaoTestSuite {
 
     @Autowired
     private InvoiceDao invoiceDao;
-    @Autowired
-    private ItemDao itemDao;
-    @Autowired
-    private ProductDao productDao;
 
     @Test
     void testInvoiceDaoSave() {
@@ -38,7 +34,7 @@ public class InvoiceDaoTestSuite {
         invoiceDao.save(invoice);
         int id = invoice.getId();
 
-        //Then
+       // Then
         assertNotEquals(0,id);
 
         //Clean up
