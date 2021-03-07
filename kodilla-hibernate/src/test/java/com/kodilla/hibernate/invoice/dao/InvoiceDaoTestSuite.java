@@ -38,6 +38,6 @@ public class InvoiceDaoTestSuite {
         assertNotEquals(0,id);
 
         //Clean up
-//        invoiceDao.deleteById(id);
+        invoiceDao.deleteById(id);
     }
 }
