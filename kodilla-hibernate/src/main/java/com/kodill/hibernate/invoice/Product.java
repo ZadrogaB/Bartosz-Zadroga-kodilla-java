@@ -1,4 +1,4 @@
-package com.kodilla.hibernate.invoice;
+package com.kodill.hibernate.invoice;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

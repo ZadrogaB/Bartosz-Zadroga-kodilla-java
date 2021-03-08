@@ -1,9 +1,10 @@
-/*
-package com.kodilla.hibernate.invoice.dao;
+package com.kodill.hibernate.invoice.dao;
 
-import com.kodilla.hibernate.invoice.Invoice;
-import com.kodilla.hibernate.invoice.Item;
-import com.kodilla.hibernate.invoice.Product;
+
+
+import com.kodill.hibernate.invoice.Invoice;
+import com.kodill.hibernate.invoice.Item;
+import com.kodill.hibernate.invoice.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,7 @@ public class InvoiceDaoTestSuite {
     @Test
     void testInvoiceDaoSave() {
         //Given
-        Item  item1 = new Item( BigDecimal.valueOf(10), 5, BigDecimal.valueOf(50));
+        Item item1 = new Item( BigDecimal.valueOf(10), 5, BigDecimal.valueOf(50));
         Item  item2 = new Item( BigDecimal.valueOf(20), 3, BigDecimal.valueOf(60));
         Product product1 = new Product("Product1");
         Product product2 = new Product("Product2");
@@ -42,4 +43,3 @@ public class InvoiceDaoTestSuite {
         invoiceDao.deleteById(id);
     }
 }
-*/
