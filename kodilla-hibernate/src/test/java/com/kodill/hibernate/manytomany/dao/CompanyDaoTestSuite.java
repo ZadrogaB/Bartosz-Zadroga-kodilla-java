@@ -16,7 +16,9 @@ class CompanyDaoTestSuite {
     @Autowired
     private CompanyDao companyDao;
 
+    @Autowired
     private EmployeeDao employeeDao;
+
 
     @Test
     void testSaveManyToMany() {
@@ -43,25 +45,23 @@ class CompanyDaoTestSuite {
 
         //When
         companyDao.save(softwareMachine);
-        int softwareMachineId = softwareMachine.getId();
         companyDao.save(dataMaesters);
-        int dataMaestersId = dataMaesters.getId();
         companyDao.save(greyMatter);
-        int greyMatterId = greyMatter.getId();
 
         //Then
-        assertNotEquals(0, softwareMachineId);
-        assertNotEquals(0, dataMaestersId);
-        assertNotEquals(0, greyMatterId);
+        assertNotEquals(0, softwareMachine.getId());
+        assertNotEquals(0, dataMaesters.getId());
+        assertNotEquals(0, greyMatter.getId());
 
         //CleanUp
         try {
-            companyDao.deleteById(softwareMachineId);
-            companyDao.deleteById(dataMaestersId);
-            companyDao.deleteById(greyMatterId);
+            companyDao.deleteById(softwareMachine.getId());
+            companyDao.deleteById(dataMaesters.getId());
+            companyDao.deleteById(greyMatter.getId());
         } catch (Exception e) {
-            //do nothing
+
         }
+
     }
 
     @Test
@@ -94,7 +94,9 @@ class CompanyDaoTestSuite {
         List<Company> result = companyDao.findCompanyByBeginningOfName("Gre");
 
         //Then
-        assertEquals(greyMatter, result.get(0));
+        System.out.println("Id = " + greyMatter.getId() + " Name: " + greyMatter.getName());
+        System.out.println("Id = " + result.get(0).getId() + " Name: " + result.get(0).getName());
+        assertEquals(greyMatter.getId(), result.get(0).getId());
 
         //Clean up
         try {
@@ -102,8 +104,9 @@ class CompanyDaoTestSuite {
             companyDao.deleteById(dataMaesters.getId());
             companyDao.deleteById(greyMatter.getId());
         } catch (Exception e) {
-            //do nothing
+
         }
+
     }
 
     @Test
@@ -135,14 +138,17 @@ class CompanyDaoTestSuite {
         List<Employee> result = employeeDao.findEmployeeByLastname("Smith");
 
         //Then
-        assertEquals(johnSmith, result.get(0));
+        assertEquals(johnSmith.getId(), result.get(0).getId());
         //Clean up
         try {
             companyDao.deleteById(softwareMachine.getId());
             companyDao.deleteById(dataMaesters.getId());
             companyDao.deleteById(greyMatter.getId());
         } catch (Exception e) {
-            //do nothing
+
         }
+
     }
+
+
 }

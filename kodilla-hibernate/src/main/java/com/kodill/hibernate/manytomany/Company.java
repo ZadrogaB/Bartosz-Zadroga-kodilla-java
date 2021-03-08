@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 @NamedNativeQuery(
         name = "Company.findCompanyByBeginningOfName",
-        query = "SELECT * FROM COMPANIES" +
+        query = "SELECT * FROM COMPANIES " +
                 "WHERE LEFT(COMPANY_NAME, 3) = :LETTERS",
         resultClass = Company.class
 )
@@ -18,7 +18,7 @@ public class Company {
     private String name;
     private List<Employee> employees = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "companies")
+    @ManyToMany(cascade = CascadeType.ALL)
     public List<Employee> getEmployees() {
         return employees;
     }
@@ -54,5 +54,25 @@ public class Company {
 
     private void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Company company = (Company) o;
+
+        if (id != company.id) return false;
+        if (name != null ? !name.equals(company.name) : company.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
