@@ -9,6 +9,11 @@ import java.util.List;
         name = "Employee.findEmployeeByLastname",
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
+@NamedNativeQuery(
+        name = "Employee.findEmployeeByPiece",
+        query = "SELECT * FROM EMPLOYEES " +
+                "WHERE LASTNAME LIKE %:ARG" + "% OR FIRSTNAME LIKE %:ARG"+"%",
+        resultClass = Employee.class)
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
@@ -71,4 +76,6 @@ public class Employee {
     private void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+
 }

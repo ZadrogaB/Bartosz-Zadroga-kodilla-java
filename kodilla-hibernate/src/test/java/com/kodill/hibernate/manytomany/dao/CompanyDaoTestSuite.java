@@ -99,13 +99,13 @@ class CompanyDaoTestSuite {
         assertEquals(greyMatter.getId(), result.get(0).getId());
 
         //Clean up
-        try {
+        /*try {
             companyDao.deleteById(softwareMachine.getId());
             companyDao.deleteById(dataMaesters.getId());
             companyDao.deleteById(greyMatter.getId());
         } catch (Exception e) {
 
-        }
+        }*/
 
     }
 
