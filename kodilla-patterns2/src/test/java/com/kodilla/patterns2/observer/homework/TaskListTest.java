@@ -23,15 +23,25 @@ class TaskListTest {
     @Test
     void NumberOfMentorTestsTestSuite() {
         //Given
-        Mentor mentor = new Mentor("mentor");
-        TaskList mentorTaskList = new TaskList(mentor);
+        Mentor mentorOne = new Mentor("mentor1");
+        Mentor mentorTwo = new Mentor("mentor2");
+        TaskList taskListOne = new TaskList("taskListOne");
+        TaskList taskListTwo = new TaskList("taskListTwo");
+        TaskList taskListOneAndTwo = new TaskList("taskListThree");
+        taskListOne.registerObserver(mentorOne);
+        taskListTwo.registerObserver(mentorTwo);
+        taskListOneAndTwo.registerObserver(mentorOne);
+        taskListOneAndTwo.registerObserver(mentorTwo);
         //When
-        mentorTaskList.addTask("Task one");
-        mentorTaskList.addTask("Task two");
-        mentorTaskList.addTask("Task three");
+        taskListOne.addTask("aaa");
+        taskListTwo.addTask("aaa");
+        taskListTwo.addTask("aaa");
+        taskListOneAndTwo.addTask("aaa");
+        taskListOneAndTwo.addTask("aaa");
+        taskListOneAndTwo.addTask("aaa");
         //Then
-        assertEquals(3, mentor.getUpdateCount());
-
+        assertEquals(4, mentorOne.getUpdateCount());
+        assertEquals(5, mentorTwo.getUpdateCount());
     }
 
 }

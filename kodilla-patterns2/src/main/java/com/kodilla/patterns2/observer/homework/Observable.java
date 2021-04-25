@@ -1,6 +1,8 @@
 package com.kodilla.patterns2.observer.homework;
 
-public interface Observable {
+import com.kodilla.patterns2.observer.homework.Observer;
 
+public interface Observable {
+    void registerObserver(Observer observer);
     void notifyObservers();
 }
